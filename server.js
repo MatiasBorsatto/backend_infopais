@@ -9,8 +9,8 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
-await sequelize.sync({ force: true }); //force solo la primer ejecucion
-await runSeeders();
+await sequelize.sync({ alter: true });
+//await runSeeders();
 
 const interfaces = os.networkInterfaces();
 let ip = "localhost";

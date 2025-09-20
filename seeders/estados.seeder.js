@@ -6,6 +6,7 @@ export const seedEstados = async () => {
       { nombre: "borrador" },
       { nombre: "publicado" },
       { nombre: "archivado" },
+      { nombre: "eliminado" },
     ]);
     console.log("Estados creados exitosamente");
   } catch (error) {

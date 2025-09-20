@@ -1,13 +1,13 @@
-import Categoria from "./categorias.model";
-import Comentario from "./comentarios.model";
-import Estado from "./estados.model";
-import Etiqueta from "./etiquetas.model";
-import Noticia from "./noticias.model";
-import Noticia_etiqueta from "./noticias_etiquetas.model";
-import Noticia_guardada from "./noticias_guardadas.model";
-import Rol from "./roles.model";
-import Subcategoria from "./subcategorias.model";
-import Usuario from "./usuarios.model";
+import Categoria from "./categorias.model.js";
+import Comentario from "./comentarios.model.js";
+import Estado from "./estados.model.js";
+import Etiqueta from "./etiquetas.model.js";
+import Noticia from "./noticias.model.js";
+import Noticia_etiqueta from "./noticias_etiquetas.model.js";
+import Noticia_guardada from "./noticias_guardadas.model.js";
+import Rol from "./roles.model.js";
+import Subcategoria from "./subcategorias.model.js";
+import Usuario from "./usuarios.model.js";
 
 const db = {};
 
