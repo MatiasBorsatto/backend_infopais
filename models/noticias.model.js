@@ -24,14 +24,17 @@ const Noticia = sequelize.define(
     estado_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 1,
     },
     likes: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
     dislikes: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
     categoria_id: {
       type: DataTypes.INTEGER,
@@ -40,6 +43,11 @@ const Noticia = sequelize.define(
     subcategoria_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    vistas: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
     },
   },
   {

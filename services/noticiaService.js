@@ -12,6 +12,26 @@ class NoticiaService {
     }
     return await noticiaExistente.destroy();
   }
+
+  async actualizar(noticia_id) {
+    const noticiaAModificar = await Noticia.findByPk(noticia_id.id_noticia);
+    if (!noticiaAModificar) {
+      throw new Error("Noticia no encontrada");
+    }
+    return await noticiaAModificar.update(noticia_id.contenido);
+  }
+
+  async obtenerId(noticia_id) {
+    const noticiaAObtener = await Noticia.findByPk(noticia_id.id_noticia);
+    if (!noticiaAObtener) {
+      throw new Error("Noticia no encontrada");
+    }
+    return await noticiaAObtener.get();
+  }
+
+  async obtener() {
+    return await Noticia.get();
+  }
 }
 
 export default new NoticiaService();
