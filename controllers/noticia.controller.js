@@ -77,7 +77,14 @@ class NoticiaController {
         mensaje: "Las noticias se obtuvieron correctamente",
         obtenerNoticias,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error al obtener las noticias:", error);
+
+      if (error.message === "Noticia no encontrada") {
+        res.status(404).json({ error: error.message });
+      }
+      res.status(400).json({ error: error.message });
+    }
   }
 }
 

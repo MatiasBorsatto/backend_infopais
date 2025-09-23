@@ -1,3 +1,4 @@
+import { TIME } from "sequelize";
 import Noticia from "../models/noticias.model.js";
 
 class NoticiaService {
@@ -30,7 +31,7 @@ class NoticiaService {
   }
 
   async obtener() {
-    return await Noticia.get();
+    return await Noticia.findAll({ order: [["createdAt", "DESC"]] });
   }
 }
 
