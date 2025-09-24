@@ -1,4 +1,3 @@
-import { TIME } from "sequelize";
 import Noticia from "../models/noticias.model.js";
 
 class NoticiaService {
