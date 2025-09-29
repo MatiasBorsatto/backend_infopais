@@ -86,6 +86,26 @@ class NoticiaController {
       res.status(400).json({ error: error.message });
     }
   }
+
+  async obtenerNoticiasPorEtiqueta(req, res) {
+    try {
+      const obtenerNoticiasPorEtiqueta =
+        await noticiaService.obtenerPorEtiqueta(req.body.etiqueta_id);
+
+      res.status(200).json({
+        mensaje: "Las noticias se obtuvieron correctamente",
+        obtenerNoticiasPorEtiqueta,
+      });
+    } catch (error) {
+      console.error("Error al obtener las noticias:", error);
+
+      if (error.message === "Noticias no encontradas") {
+        res.status(404).json({ error: error.message });
+      }
+
+      res.status(400).json({ error: error.message });
+    }
+  }
 }
 
 export default new NoticiaController();

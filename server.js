@@ -9,7 +9,7 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
-await sequelize.sync({ alter: true });
+//await sequelize.sync({ alter: true });
 //await runSeeders();
 
 const interfaces = os.networkInterfaces();
