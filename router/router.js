@@ -1,7 +1,12 @@
 import express from "express";
 import Noticia from "../controllers/noticia.controller.js";
+import authController from "../controllers/auth.controller.js";
 
 const router = express.Router();
+
+//Manejo de rutas para registro / login de usuarios
+router.post("/login", authController.login);
+router.post("/register", authController.register);
 
 //Acciones noticias
 router.post("/guardar", Noticia.guardar); //Funcionando ok

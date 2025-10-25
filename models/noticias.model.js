@@ -49,6 +49,10 @@ const Noticia = sequelize.define(
       allowNull: false,
       defaultValue: 0,
     },
+    multimedia: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     tableName: "noticias",

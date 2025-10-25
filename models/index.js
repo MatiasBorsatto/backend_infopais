@@ -1,3 +1,4 @@
+import sequelize from "../config/db.js"; // ✅ importa tu instancia de conexión
 import Categoria from "./categorias.model.js";
 import Comentario from "./comentarios.model.js";
 import Estado from "./estados.model.js";
@@ -11,6 +12,8 @@ import Usuario from "./usuarios.model.js";
 
 const db = {};
 
+// Modelos
+db.sequelize = sequelize; // ✅ necesario para poder sincronizar después
 db.Categoria = Categoria;
 db.Comentario = Comentario;
 db.Estado = Estado;
