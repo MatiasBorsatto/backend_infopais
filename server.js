@@ -1,7 +1,6 @@
 import app from "./app.js";
 import dotenv from "dotenv";
 import os from "os";
-import sequelize from "./config/db.js";
 import db from "./models/index.js";
 
 import { runSeeders } from "./seeders/index.js";
@@ -10,7 +9,7 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
-await db.sequelize.sync();
+await db.sequelize.sync({ force: true });
 //await runSeeders();
 
 const interfaces = os.networkInterfaces();

@@ -17,6 +17,10 @@ const Noticia = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    by: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     contenido: {
       type: DataTypes.STRING,
       allowNull: true,
