@@ -52,6 +52,14 @@ class NoticiaService {
 
     return NoticiasContenido;
   }
+
+  async obtenerCategorias() {
+    return await db.Categoria.findAll({ order: [["createdAt", "DESC"]] });
+  }
+
+  async obtenerSubcategorias() {
+    return await db.Subcategoria.findAll({ order: [["createdAt", "DESC"]] });
+  }
 }
 
 export default new NoticiaService();
