@@ -30,6 +30,11 @@ const Usuario = sequelize.define(
       allowNull: false,
       defaultValue: 1,
     },
+    estado: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
   },
   {
     tableName: "usuarios",

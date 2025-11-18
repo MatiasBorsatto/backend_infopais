@@ -45,7 +45,11 @@ class AuthController {
 
   async register(req, res) {
     try {
-      const { nombre, fecha_nacimiento, email, password } = req.body;
+      let { nombre, fecha_nac, email, password } = req.body;
+
+      fecha_nac = new Date(fecha_nac).toISOString();
+
+      console.log(nombre, fecha_nac, email, password);
 
       // Verificar si el email ya existe
       const usuarioExistente = await authService.login(email);
@@ -61,7 +65,7 @@ class AuthController {
       // Registrar usuario nuevo
       const nuevoUsuario = await authService.register({
         nombre,
-        fecha_nacimiento,
+        fecha_nac,
         email,
         password_hash,
       });
