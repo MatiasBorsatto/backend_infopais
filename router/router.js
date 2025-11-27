@@ -8,6 +8,7 @@ const router = express.Router();
 //Manejo de rutas para registro / login de usuarios
 router.post("/login", authController.login);
 router.post("/register", authController.register);
+router.post("/logout", authController.logout);
 
 //Acciones noticias
 router.post("/guardar", Noticia.guardar); //Funcionando ok

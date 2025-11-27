@@ -29,13 +29,16 @@ class AuthController {
       // Generar token
       const token = jwt.sign(
         { id: usuario.id, email: usuario.email },
-        JWT_SECRET,
-        {
-          expiresIn: "1h",
-        }
+        JWT_SECRET
       );
 
       // Responder con token
+      res.cookie("token", token, {
+        maxAge: 3600000, //tiempo de expiracion de la cookie expresado en ms
+        httpOnly: true, //true si se quiere que solo se pueda acceder a la cookie por peticiones http
+        secure: false, //true si se quiere que la cookie solo se pueda utilizar en sitios https
+        sameSite: "lax", //lax si se quiere poder acceder a las cookies si el backend esta en un servidor distinto al del front
+      });
       res.json({ message: "Login correcto!", token, rol: usuario.rol_id });
     } catch (err) {
       console.error(err);
@@ -78,6 +81,24 @@ class AuthController {
       console.error("Error registrando usuario:", error);
       return res.status(500).json({
         error: "Error interno al registrar el usuario",
+        detalles: error.message,
+      });
+    }
+  }
+
+  async logout(req, res) {
+    try {
+      res.clearCookie("token", {
+        httpOnly: true, //true si se quiere que solo se pueda acceder a la cookie por peticiones http
+        secure: false, //true si se quiere que la cookie solo se pueda utilizar en sitios https
+        sameSite: "lax", //lax si se quiere poder acceder a las cookies si el backend esta en un servidor distinto al del front
+      });
+      return res.status(200).json({
+        mensaje: "Sesión cerrada correctamente",
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: "Error interno al eliminar cookie",
         detalles: error.message,
       });
     }
