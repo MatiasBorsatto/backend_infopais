@@ -33,6 +33,9 @@ Noticia.belongsTo(Estado, { foreignKey: "estado_id" });
 Comentario.belongsTo(Usuario, { foreignKey: "usuario_id" });
 Comentario.belongsTo(Noticia, { foreignKey: "noticia_id" });
 Subcategoria.belongsTo(Categoria, { foreignKey: "categoria_id" });
+Usuario.belongsTo(Estado, {
+  foreignKey: "estado",
+});
 
 // Relaciones 'hasMany' (uno a muchos)
 Usuario.hasMany(Noticia, { foreignKey: "usuario_id" });
@@ -42,6 +45,9 @@ Categoria.hasMany(Subcategoria, { foreignKey: "categoria_id" });
 Subcategoria.hasMany(Noticia, { foreignKey: "subcategoria_id" });
 Estado.hasMany(Noticia, { foreignKey: "estado_id" });
 Noticia.hasMany(Comentario, { foreignKey: "noticia_id" });
+Estado.hasMany(Usuario, {
+  foreignKey: "estado",
+});
 
 // Relaciones 'belongsToMany' (muchos a muchos)
 Noticia.belongsToMany(Etiqueta, {

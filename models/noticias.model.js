@@ -22,7 +22,7 @@ const Noticia = sequelize.define(
       allowNull: true,
     },
     contenido: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     estado_id: {
