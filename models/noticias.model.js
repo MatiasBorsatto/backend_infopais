@@ -57,6 +57,11 @@ const Noticia = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    slug: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
   },
   {
     tableName: "noticias",

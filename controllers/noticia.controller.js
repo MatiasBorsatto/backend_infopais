@@ -3,7 +3,27 @@ import noticiaService from "../services/noticiaService.js";
 class NoticiaController {
   async guardar(req, res) {
     try {
-      const noticia = await noticiaService.guardar(req.body);
+      const {
+        by,
+        categoria_id,
+        contenido,
+        estado_id,
+        multimedia,
+        subcategoria_id,
+        subtitulo,
+        titulo,
+      } = req.body;
+
+      const noticia = await noticiaService.guardar({
+        by,
+        categoria_id,
+        contenido,
+        estado_id,
+        multimedia,
+        subcategoria_id,
+        subtitulo,
+        titulo,
+      });
 
       res.status(201).json({
         mensaje: "Se guardo la noticia correctamente",
