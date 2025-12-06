@@ -13,7 +13,7 @@ const PORT = process.env.PORT;
 //await runSeeders();
 
 const interfaces = os.networkInterfaces();
-let ip = "localhost";
+let ip = "192.168.1.16" | "localhost";
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Servidor activo en http://${ip}:${PORT}`);
