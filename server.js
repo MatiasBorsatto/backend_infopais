@@ -1,19 +1,22 @@
 import app from "./app.js";
 import dotenv from "dotenv";
 import os from "os";
-import db from "./models/index.js";
-
-import { runSeeders } from "./seeders/index.js";
 
 dotenv.config();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
-//await db.sequelize.sync({ force: true });
-//await runSeeders();
-
+// Obtener IP local real
 const interfaces = os.networkInterfaces();
-let ip = "192.168.1.16" | "localhost";
+let ip = "localhost";
+
+for (const name in interfaces) {
+  for (const iface of interfaces[name]) {
+    if (iface.family === "IPv4" && !iface.internal) {
+      ip = iface.address;
+    }
+  }
+}
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Servidor activo en http://${ip}:${PORT}`);
