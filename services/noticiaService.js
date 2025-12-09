@@ -1,16 +1,17 @@
 import db from "../models/index.js";
+import { Op } from "sequelize";
 
 class NoticiaService {
   async guardar(noticia) {
     return await db.Noticia.create(noticia);
   }
 
-  async eliminar(noticia) {
-    const noticiaExistente = await db.Noticia.findByPk(noticia.id_noticia);
+  async eliminar(id) {
+    const noticiaExistente = await db.Noticia.findByPk(id);
     if (!noticiaExistente) {
       throw new Error("Noticia no encontrada");
     }
-    return await noticiaExistente.destroy();
+    return await noticiaExistente.update({ estado_id: 3 });
   }
 
   async actualizar(noticia_id) {
@@ -30,7 +31,14 @@ class NoticiaService {
   }
 
   async obtener() {
-    return await db.Noticia.findAll({ order: [["createdAt", "DESC"]] });
+    return await db.Noticia.findAll({
+      order: [["createdAt", "DESC"]],
+      where: {
+        estado_id: {
+          [Op.in]: [1, 2], // Más eficiente que Op.or para múltiples valores
+        },
+      },
+    });
   }
 
   async obtenerPorEtiqueta(body) {

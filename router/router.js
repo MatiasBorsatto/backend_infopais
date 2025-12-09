@@ -12,7 +12,7 @@ router.post("/logout", authController.logout);
 
 //Acciones noticias
 router.post("/guardar", Noticia.guardar); //Funcionando ok
-router.delete("/eliminar", Noticia.eliminar); //Funcionando ok
+router.delete("/eliminar/:id", Noticia.eliminar); //Funcionando ok
 router.put("/actualizar", Noticia.actualizar); //Funcionando ok
 router.get("/obtener", Noticia.obtener); //Funcionando ok
 router.get("/obtenerId", Noticia.obtenerPorId); //Funcionando ok

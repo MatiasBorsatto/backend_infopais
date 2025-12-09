@@ -1,4 +1,5 @@
 import noticiaService from "../services/noticiaService.js";
+import slugify from "slugify";
 
 class NoticiaController {
   async guardar(req, res) {
@@ -14,6 +15,14 @@ class NoticiaController {
         titulo,
       } = req.body;
 
+      const slug = slugify(titulo, {
+        replacement: "-", // replace spaces with replacement character, defaults to `-`
+        lower: true, // convert to lower case, defaults to `false`
+        strict: false, // strip special characters except replacement, defaults to `false`
+        locale: "es", // language code of the locale to use
+        trim: true, // trim leading and trailing replacement chars, defaults to `true`
+      });
+
       const noticia = await noticiaService.guardar({
         by,
         categoria_id,
@@ -23,6 +32,7 @@ class NoticiaController {
         subcategoria_id,
         subtitulo,
         titulo,
+        slug,
       });
 
       res.status(201).json({
@@ -37,7 +47,8 @@ class NoticiaController {
 
   async eliminar(req, res) {
     try {
-      const noticia = await noticiaService.eliminar(req.body);
+      const { id } = req.params;
+      const noticia = await noticiaService.eliminar(id);
 
       res.status(200).json({
         mensaje: "La noticia se eliminó correctamente",
