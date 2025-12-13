@@ -66,7 +66,9 @@ class NoticiaController {
 
   async actualizar(req, res) {
     try {
-      const actualizarNoticia = await noticiaService.actualizar(req.body);
+      const { id } = req.params;
+      const noticia = req.body;
+      const actualizarNoticia = await noticiaService.actualizar(id, noticia);
 
       res.status(200).json({
         mensaje: "La noticia se actualizó correctamente",

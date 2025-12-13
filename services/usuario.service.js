@@ -10,6 +10,15 @@ class UsuarioService {
     }
   }
 
+  async obtenerUsuario(id) {
+    try {
+      return await Usuario.findByPk(id);
+    } catch (error) {
+      console.error("Error al loguearse:", error);
+      throw error;
+    }
+  }
+
   async actualizarUsuario(id, datos) {
     try {
       return await Usuario.update(datos, {

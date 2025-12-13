@@ -14,12 +14,15 @@ class NoticiaService {
     return await noticiaExistente.update({ estado_id: 3 });
   }
 
-  async actualizar(noticia_id) {
-    const noticiaAModificar = await db.Noticia.findByPk(noticia_id.id_noticia);
+  async actualizar(id, noticia) {
+    console.log(id);
+    console.log(noticia);
+    const noticiaAModificar = await db.Noticia.findByPk(id);
+    console.log(noticiaAModificar);
     if (!noticiaAModificar) {
       throw new Error("Noticia no encontrada");
     }
-    return await noticiaAModificar.update(noticia_id.contenido);
+    return await noticiaAModificar.update(noticia);
   }
 
   async obtenerId(noticia_id) {

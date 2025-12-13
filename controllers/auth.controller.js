@@ -15,6 +15,8 @@ class AuthController {
       // Buscar usuario
       const usuario = await authService.login(email);
 
+      console.log(usuario);
+
       if (!usuario) {
         return res.status(401).json({ error: "El usuario no existe" });
       }
@@ -28,18 +30,33 @@ class AuthController {
 
       // Generar token
       const token = jwt.sign(
-        { id: usuario.id, email: usuario.email },
+        { id: usuario.id_usuario, email: usuario.email },
         JWT_SECRET
       );
 
+      // 1. Crea un objeto con toda la información
+      const cookieData = {
+        token: token,
+        userId: usuario.id_usuario,
+      };
+
+      console.log(cookieData);
+
+      // 2. Convierte el objeto a una cadena JSON
+      const cookieValue = JSON.stringify(cookieData);
+
       // Responder con token
-      res.cookie("token", token, {
+      res.cookie("sessionData", cookieValue, {
         maxAge: 3600000, //tiempo de expiracion de la cookie expresado en ms
         httpOnly: true, //true si se quiere que solo se pueda acceder a la cookie por peticiones http
         secure: false, //true si se quiere que la cookie solo se pueda utilizar en sitios https
         sameSite: "lax", //lax si se quiere poder acceder a las cookies si el backend esta en un servidor distinto al del front
       });
-      res.json({ message: "Login correcto!", token, rol: usuario.rol_id });
+      res.json({
+        message: "Login correcto!",
+        token,
+        rol: usuario.rol_id,
+      });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Error en el servidor" });

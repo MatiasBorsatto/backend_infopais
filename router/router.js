@@ -13,14 +13,16 @@ router.post("/logout", authController.logout);
 //Acciones noticias
 router.post("/guardar", Noticia.guardar); //Funcionando ok
 router.delete("/eliminar/:id", Noticia.eliminar); //Funcionando ok
-router.put("/actualizar", Noticia.actualizar); //Funcionando ok
+router.put("/actualizar/:id", Noticia.actualizar); //Funcionando ok
 router.get("/obtener", Noticia.obtener); //Funcionando ok
 router.get("/obtenerId", Noticia.obtenerPorId); //Funcionando ok
 router.get("/obtenerPorEtiqueta", Noticia.obtenerNoticiasPorEtiqueta); //Funcionando ok
 router.get("/obtenerCat", Noticia.obtenerCategorias); //Funcionando ok
 router.get("/obtenerSubCat", Noticia.obtenerSubcategorias); //Funcionando ok
 
+//Usuarios
 router.get("/obtenerUsers", UsuarioController.obtenerUsuarios); //Funcionando ok
+router.get("/obtenerUser/:id", UsuarioController.obtenerUsuario);
 router.put("/actualizarUsuario/:id", UsuarioController.actualizarUsuario); //Funcionando ok
 router.delete("/eliminarUsuario/:id", UsuarioController.eliminarUsuario); //Funcionando ok
 
