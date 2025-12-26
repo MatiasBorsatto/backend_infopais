@@ -38,6 +38,7 @@ class AuthController {
       const cookieData = {
         token: token,
         userId: usuario.id_usuario,
+        rol: usuario.rol_id,
       };
 
       console.log(cookieData);
@@ -46,10 +47,10 @@ class AuthController {
       const cookieValue = JSON.stringify(cookieData);
 
       // Responder con token
-      res.cookie("sessionData", cookieValue, {
+      res.cookie("session", cookieValue, {
         maxAge: 3600000, //tiempo de expiracion de la cookie expresado en ms
         httpOnly: true, //true si se quiere que solo se pueda acceder a la cookie por peticiones http
-        secure: false, //true si se quiere que la cookie solo se pueda utilizar en sitios https
+        secure: process.env.NODE_ENV === "produccion", //true si se quiere que la cookie solo se pueda utilizar en sitios https
         sameSite: "lax", //lax si se quiere poder acceder a las cookies si el backend esta en un servidor distinto al del front
       });
       res.json({

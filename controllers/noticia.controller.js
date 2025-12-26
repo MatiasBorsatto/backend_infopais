@@ -4,16 +4,12 @@ import slugify from "slugify";
 class NoticiaController {
   async guardar(req, res) {
     try {
-      const {
-        by,
-        categoria_id,
-        contenido,
-        estado_id,
-        multimedia,
-        subcategoria_id,
-        subtitulo,
-        titulo,
-      } = req.body;
+      const { by, contenido, multimedia, id_subcategoria, subtitulo, titulo } =
+        req.body;
+
+      const categoria_id = req.body.id_categoria;
+      const estado_id = req.body.id_estado;
+      const subcategoria_id = req.body.id_subcategoria;
 
       const slug = slugify(titulo, {
         replacement: "-", // replace spaces with replacement character, defaults to `-`
@@ -145,7 +141,6 @@ class NoticiaController {
       const obtenerCategorias = await noticiaService.obtenerCategorias();
 
       res.status(200).json({
-        mensaje: "Las categorias se obtuvieron correctamente",
         obtenerCategorias,
       });
     } catch (error) {
