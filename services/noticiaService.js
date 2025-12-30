@@ -44,6 +44,18 @@ class NoticiaService {
     });
   }
 
+  async obtenerByCat(id) {
+    return await db.Noticia.findAll({
+      order: [["createdAt", "DESC"]],
+      where: {
+        estado_id: {
+          [Op.in]: [1, 2], // Más eficiente que Op.or para múltiples valores
+        },
+        categoria_id: id,
+      },
+    });
+  }
+
   async obtenerPorEtiqueta(body) {
     const NoticiasEtiqueta = await db.Noticia_etiqueta.findAll({
       where: { etiqueta_id: body },

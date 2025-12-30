@@ -15,10 +15,12 @@ router.post("/guardar", Noticia.guardar); //Funcionando ok
 router.delete("/eliminar/:id", Noticia.eliminar); //Funcionando ok
 router.put("/actualizar/:id", Noticia.actualizar); //Funcionando ok
 router.get("/obtener", Noticia.obtener); //Funcionando ok
+router.get("/obtenerByCat/:id", Noticia.obtenerByCat); //Funcionando ok
 router.get("/obtenerId", Noticia.obtenerPorId); //Funcionando ok
 router.get("/obtenerPorEtiqueta", Noticia.obtenerNoticiasPorEtiqueta); //Funcionando ok
 router.get("/obtenerCat", Noticia.obtenerCategorias); //Funcionando ok
 router.get("/obtenerSubCat", Noticia.obtenerSubcategorias); //Funcionando ok
+router.post("/subirArchivos", Noticia.subirArchivos); //Funcionando ok
 
 //Usuarios
 router.get("/obtenerUsers", UsuarioController.obtenerUsuarios); //Funcionando ok

@@ -1,5 +1,9 @@
 import noticiaService from "../services/noticiaService.js";
 import slugify from "slugify";
+import multer from "multer";
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage }).single("filepond");
 
 class NoticiaController {
   async guardar(req, res) {
@@ -80,6 +84,44 @@ class NoticiaController {
     }
   }
 
+  async subirArchivos(req, res, err) {
+    upload(req, res, (err) => {
+      if (err) {
+        console.error("Error al procesar el archivo:", err);
+        return res.status(500).json({ error: "Error al procesar el archivo" });
+      }
+
+      // Verificar si el archivo se cargó correctamente
+      if (!req.file) {
+        return res.status(400).json({ error: "No se recibió ningún archivo." });
+      }
+
+      // Mostrar en consola la información del archivo
+      console.log("Archivo recibido:");
+      console.log("Nombre del archivo:", req.file.originalname); // Nombre original del archivo
+      console.log("Tipo MIME:", req.file.mimetype); // Tipo MIME del archivo
+      console.log("Tamaño en bytes:", req.file.size); // Tamaño del archivo en bytes
+
+      fetch("http://170.239.50.165/remote.php/dav");
+
+      // Aquí puedes hacer lo que necesites con el archivo, como guardarlo en la base de datos o en el sistema de archivos
+
+      // Responder con la información del archivo recibido
+      res.status(200).json({
+        mensaje: "El archivo se cargó correctamente",
+        imagen: req.file, // Información completa del archivo
+      });
+    });
+  }
+  catch(error) {
+    console.error("Error actualizando la noticia:", error);
+
+    if (error.message === "Noticia no encontrada") {
+      res.status(404).json({ error: error.message });
+    }
+    res.status(400).json({ error: error.message });
+  }
+
   async obtenerPorId(req, res) {
     try {
       const obtenerNoticiaId = await noticiaService.obtenerId(req.body);
@@ -105,6 +147,26 @@ class NoticiaController {
       res.status(200).json({
         mensaje: "Las noticias se obtuvieron correctamente",
         obtenerNoticias,
+      });
+    } catch (error) {
+      console.error("Error al obtener las noticias:", error);
+
+      if (error.message === "Noticia no encontrada") {
+        res.status(404).json({ error: error.message });
+      }
+      res.status(400).json({ error: error.message });
+    }
+  }
+
+  async obtenerByCat(req, res) {
+    try {
+      const { id } = req.params;
+
+      const obtenerNoticiasByCat = await noticiaService.obtenerByCat(id);
+
+      res.status(200).json({
+        mensaje: "Las noticias se obtuvieron correctamente",
+        obtenerNoticiasByCat,
       });
     } catch (error) {
       console.error("Error al obtener las noticias:", error);
