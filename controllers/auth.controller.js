@@ -106,7 +106,7 @@ class AuthController {
 
   async logout(req, res) {
     try {
-      res.clearCookie("token", {
+      res.clearCookie("session", {
         httpOnly: true, //true si se quiere que solo se pueda acceder a la cookie por peticiones http
         secure: false, //true si se quiere que la cookie solo se pueda utilizar en sitios https
         sameSite: "lax", //lax si se quiere poder acceder a las cookies si el backend esta en un servidor distinto al del front

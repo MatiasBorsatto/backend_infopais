@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "seed": "node scripts/runSeeders.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -19,7 +20,8 @@
     "multer": "^2.0.2",
     "nodemon": "^3.1.10",
     "pg": "^8.16.3",
-    "sequelize": "^6.37.7",
+    "sequelize": "^6.37.8",
+    "sharp": "^0.35.1",
     "slugify": "^1.6.6"
   }
 }

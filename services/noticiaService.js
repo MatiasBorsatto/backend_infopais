@@ -33,6 +33,14 @@ class NoticiaService {
     return await noticiaAObtener.get();
   }
 
+  async obtenerPorSlug(slug) {
+    const noticia = await db.Noticia.findOne({ where: { slug } });
+    if (!noticia) {
+      throw new Error("Noticia no encontrada");
+    }
+    return noticia.get();
+  }
+
   async obtener() {
     return await db.Noticia.findAll({
       order: [["createdAt", "DESC"]],
